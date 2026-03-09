@@ -1189,5 +1189,16 @@
     document.getElementById('paypalBtn').href = paypalUrl;
   }
 </script>
+<script>
+  // Auto-communicate page height to Wix iFrame
+  function sendHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'iwh', value: height }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  // Keep reporting height as content changes
+  setInterval(sendHeight, 500);
+</script>
 </body>
 </html>
